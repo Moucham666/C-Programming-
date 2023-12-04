@@ -471,4 +471,23 @@ int main()
     return 0;
 }
 
+/*26. Write a program to calculate and print the sum of the series 1-3+5-7+.......N.*/
 
+#include <stdio.h>
+
+int main() {
+    int n, sum = 0;
+
+    printf("Enter the number of terms: ");
+    scanf("%d", &n);
+
+    
+    for (int i = 0; i < n; i++) {
+        int term = (2 * i + 1) * (i % 2 == 0 ? 1 : -1);
+        sum += term;
+    }
+
+    printf("Sum of the series: %d\n", sum);
+
+    return 0;
+}
