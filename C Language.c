@@ -491,3 +491,123 @@ int main() {
 
     return 0;
 }
+
+/*27. Enter a number and a base and convert the number into the given base.*/
+
+#include <stdio.h>
+
+void convertToBase(int number, int base) {
+    if (number == 0) {
+        printf("Converted number: 0\n");
+        return;
+    }
+
+    int result[32];
+    int index = 0;
+
+    while (number > 0) {
+        result[index++] = number % base;
+        number /= base;
+    }
+
+    printf("Converted number: ");
+    for (int i = index - 1; i >= 0; i--) {
+        printf("%d", result[i]);
+    }
+
+    printf("\n");
+}
+
+int main() {
+    int number, base;
+
+    // Input: Enter a number and a base
+    printf("Enter a number: ");
+    scanf("%d", &number);
+
+    printf("Enter the base: ");
+    scanf("%d", &base);
+
+    // Call the conversion function
+    convertToBase(number, base);
+
+    return 0;
+}
+
+/*28.  Convert a binary number into its decimal equivalent.*/
+
+#include <stdio.h>
+
+int binaryToDecimal(int binary) {
+    int decimal = 0, base = 1, remainder;
+
+    while (binary > 0) {
+        remainder = binary % 10;
+        decimal += remainder * base;
+        binary /= 10;
+        base *= 2;
+    }
+
+    return decimal;
+}
+
+int main() {
+    int binaryNumber;
+
+    printf("Enter a binary number: ");
+    scanf("%d", &binaryNumber);
+
+    printf("Decimal equivalent: %d\n", binaryToDecimal(binaryNumber));
+
+    return 0;
+}
+
+/* 29.Calculate the frequency of digits in a number.*/
+
+#include <stdio.h>
+
+void calculateDigitFrequency(int number) {
+    int frequency[10] = {0};  // Array to store digit frequencies
+
+    while (number > 0) {
+        int digit = number % 10;
+        frequency[digit]++;
+        number /= 10;
+    }
+
+    printf("Digit frequencies:\n");
+    for (int i = 0; i < 10; i++) {
+        if (frequency[i] > 0) {
+            printf("Digit %d: %d times\n", i, frequency[i]);
+        }
+    }
+}
+
+int main() {
+    int inputNumber;
+
+    printf("Enter a number: ");
+    scanf("%d", &inputNumber);
+
+    calculateDigitFrequency(inputNumber);
+
+    return 0;
+}
+
+/* 30. Calculate square root of a number. */
+
+#include <stdio.h>
+#include <math.h>
+
+int main() {
+    double number, result;
+
+    printf("Enter a number: ");
+    scanf("%lf", &number);
+
+    result = sqrt(number);
+
+    printf("Square root: %lf\n", result);
+
+    return 0;
+}
