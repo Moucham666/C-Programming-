@@ -1,135 +1,129 @@
-//Function to check a prime number
+/*1. Function to print sum and product of digits of an integer*/
 #include <stdio.h>
 
-int isPrime(int num) {
-    if (num <= 1) {
-        return 0; // Not a prime number
-    }
-
-    for (int i = 2; i * i <= num; ++i) {
-        if (num % i == 0) {
-            return 0; 
-        }
-    }
-
-    return 1; 
-}
-
-int main() {
-  
-    int number;
-    printf("Enter a number: ");
-    scanf("%d", &number);
-
-    if (isPrime(number)) {
-        printf("%d is a prime number.\n", number);
-    } else {
-        printf("%d is not a prime number.\n", number);
-    }
-
-    return 0;
-}
-//Function to check a Armstrong number.
-#include <stdio.h>
-#include <math.h>
-
-int isArmstrong(int num) {
-    int originalNum = num, n = 0, sum = 0;
-
-    while (originalNum != 0) {
-        originalNum /= 10;
-        ++n;
-    }
-
-    originalNum = num;
-
-    while (originalNum != 0) {
-        sum += pow(originalNum % 10, n);
-        originalNum /= 10;
-    }
-
-    return (sum == num);
-}
-
-int main() {
-    int number;
-    printf("Enter a number: ");
-    scanf("%d", &number);
-
-    printf("%d %s an Armstrong number.\n", number, isArmstrong(number) ? "is" : "is not");
-
-    return 0;
-}
-// Function to to print sum and product of digits of an integer.
-#include <stdio.h>
-
-void sumAndProductOfDigits(int num) {
-    int sum = 0, product = 1;
-
+void sum_and_product_of_digits(int num, int *sum, int *product) {
+    *sum = 0;
+    *product = 1;
+    
     while (num) {
         int digit = num % 10;
-        sum += digit;
-        product *= digit;
+        *sum += digit;
+        *product *= digit;
         num /= 10;
     }
-
-    printf("Sum: %d\nProduct: %d\n", sum, product);
 }
 
 int main() {
-    int number;
-    printf("Enter an integer: ");
-    scanf("%d", &number);
+    int num, sum_digits = 0, product_digits = 1;
 
-    sumAndProductOfDigits(number);
+    printf("Enter a non-negative integer: ");
+    scanf("%d", &num);
+
+    if (num < 0) {
+        printf("Invalid input.\n");
+        return 1;
+    }
+
+    sum_and_product_of_digits(num, &sum_digits, &product_digits);
+
+    printf("Sum of digits: %d\n", sum_digits);
+    printf("Product of digits: %d\n", product_digits);
 
     return 0;
 }
-//Function to swap values of two variables.
+
+/*2. Write a function to print fibonacci series using recursion and iteration*/
 #include <stdio.h>
 
-void swap(int *a, int *b) {
-    *a ^= *b;
-    *b ^= *a;
-    *a ^= *b;
+int fibonacci_recursive(int n) {
+    return (n <= 1) ? n : fibonacci_recursive(n - 1) + fibonacci_recursive(n - 2);
+}
+
+void fibonacci_iterative(int n) {
+    int a = 0, b = 1;
+
+    for (int i = 0; i < n; ++i) {
+        printf("%d, ", a);
+        b = a + b;
+        a = b - a;
+    }
 }
 
 int main() {
-    int x, y;
+    int terms;
 
-    printf("Enter the value of x: ");
-    scanf("%d", &x);
+    printf("Enter the number of terms for Fibonacci series: ");
+    scanf("%d", &terms);
 
-    printf("Enter the value of y: ");
-    scanf("%d", &y);
+    printf("Fibonacci series (recursive): ");
+    for (int i = 0; i < terms; ++i) {
+        printf("%d, ", fibonacci_recursive(i));
+    }
 
-    printf("Before swapping: x = %d, y = %d\n", x, y);
+    printf("\n");
 
-    swap(&x, &y);
-
-    printf("After swapping: x = %d, y = %d\n", x, y);
+    printf("Fibonacci series (iterative): ");
+    fibonacci_iterative(terms);
 
     return 0;
 }
-//Function to check perfect numbers.
+
+/*3. *Write a function to to find GCD of two numbers using recursion and iteration.*/
+
 #include <stdio.h>
 
-int isPerfect(int num) {
-    int sum = 1;
-    for (int i = 2; i * i <= num; ++i)
-        if (num % i == 0)
-            sum += (i == num / i) ? i : i + num / i;
+int gcd_recursive(int a, int b) {
+    return (b == 0) ? a : gcd_recursive(b, a % b);
+}
 
-    return (sum == num);
+int gcd_iterative(int a, int b) {
+    int temp;
+    while (b != 0) {
+        temp = b;
+        b = a % b;
+        a = temp;
+    }
+    return a;
 }
 
 int main() {
-    int number;
-    printf("Enter a number: ");
-    scanf("%d", &number);
+    int num1, num2;
 
-    printf("%d %s a perfect number.\n", number, isPerfect(number) ? "is" : "is not");
+    printf("Enter two numbers: ");
+    scanf("%d %d", &num1, &num2);
+
+    printf("GCD (recursive): %d\n", gcd_recursive(num1, num2));
+    printf("GCD (iterative): %d\n", gcd_iterative(num1, num2));
 
     return 0;
 }
+
+/*4.Write a function to to find factorial of a positive integer using recursion and iteration.*/
+
+#include <stdio.h>
+
+int factorial_recursive(int n) {
+    return (n == 0 || n == 1) ? 1 : n * factorial_recursive(n - 1);
+}
+
+int factorial_iterative(int n) {
+    int result = 1;
+    for (int i = 1; i <= n; ++i) {
+        result *= i;
+    }
+    return result;
+}
+
+int main() {
+    int num;
+
+    printf("Enter a positive integer: ");
+    scanf("%d", &num);
+
+    printf("Factorial (recursive): %d\n", factorial_recursive(num));
+    printf("Factorial (iterative): %d\n", factorial_iterative(num));
+
+    return 0;
+}
+
 
